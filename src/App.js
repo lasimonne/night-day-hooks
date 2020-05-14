@@ -1,26 +1,27 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { Component } from "react";
+import ToggleButton from "./ToggleButton";
+import "./App.css";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+class App extends Component {
+  state = {
+    mode: false,
+    theme: ["light", "dark"]
+  };
+  changeMode = () => {
+    this.setState(state => ({
+      mode: !state.mode
+    }));
+    console.log(this.state.mode ? "Day" : "Night");
+  };
+  render() {
+    const { mode, theme } = this.state;
+    return (
+      <div className={`mode ${mode ? theme[1] : theme[0]}`}>
+        <h1>{mode ? "NIGHT" : "DAY"}</h1>
+        <ToggleButton changeMode={this.changeMode} />
+      </div>
+    );
+  }
 }
 
 export default App;
